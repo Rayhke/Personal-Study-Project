@@ -37,6 +37,7 @@ public class ThreadPool {
 
     /**
      * Default Constructor
+     *
      * @param runnable Thread 가 수행할 작업
      */
     public ThreadPool(Runnable runnable) {
@@ -52,7 +53,7 @@ public class ThreadPool {
      * 1. poolSize 가 1미만일 경우<br>
      * 2. runnable 이 null 일 경우
      */
-    public ThreadPool (int poolSize, Runnable runnable) {
+    public ThreadPool(int poolSize, Runnable runnable) {
         if (poolSize < 0) {
             throw new IllegalArgumentException();
         }

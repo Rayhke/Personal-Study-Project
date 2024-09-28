@@ -10,9 +10,9 @@ public class SuccessMain {
         ThreadPool threadPool = new ThreadPool(worker);
         threadPool.start();
 
-        // 20초 가량 Main Thread 를 중지 시키기
+        // 20초 가량 Main Thread 를 중지
         try {
-            Thread.sleep(20000);
+            Thread.sleep(20 * 1000);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }

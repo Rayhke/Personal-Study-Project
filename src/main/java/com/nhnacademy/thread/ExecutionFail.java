@@ -6,13 +6,12 @@ import com.nhnacademy.util.WorkCounter;
 /**
  * 작업 실행
  */
-public class Execution {
+public class ExecutionFail {
 
     /**
-     * synchronized 를 Method 에 해두어<br>
-     * 동시에 여러 Thread 가 접근하는 것을 막기
+     * 여러 Thread 가 동시에 접근하게 되면...
      */
-    public static synchronized void execution() {
+    public static void execution() {
         try {
             Thread.sleep(1000);
             int working = Work.getWorking();
