@@ -161,8 +161,10 @@ public class MovableImpl extends PaintableImpl implements Movable {
      */
     @Override
     public synchronized void moveTo(int x, int y) {
-        log.debug("minX = {}, minY = {}, maxX = {}, maxY = {}",
-                x, y, x + super.getWidth(), y + super.getHeight());
+        /*int widthDiv2 = super.getWidth() / 2;
+        int heightDiv2 = super.getHeight() / 2;
+        log.debug("minX={}, minY={}, maxX={}, maxY={}",
+                x - widthDiv2, y - heightDiv2, x + widthDiv2, y + heightDiv2);*/
         super.setLocation(x, y);
     }
 
@@ -177,5 +179,11 @@ public class MovableImpl extends PaintableImpl implements Movable {
             throw new OutOfTimeRangeException(dt);
         }
         this.dt = dt;
+    }
+
+    // TODO : 임시
+    @Override
+    public String toString() {
+        return super.toString();
     }
 }

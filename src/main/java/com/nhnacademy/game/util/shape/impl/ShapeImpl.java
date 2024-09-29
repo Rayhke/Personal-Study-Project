@@ -99,7 +99,6 @@ public class ShapeImpl implements Shape {
 
     public ShapeImpl bounds(int minX, int minY, int width, int height) {
         boundsRangeCheck(minX, minY, width, height);
-
         this.bounds = new Rectangle(minX, minY, width, height);
         return this;
     }
@@ -144,11 +143,7 @@ public class ShapeImpl implements Shape {
 
     @Override
     public Point getLocation() {
-        Point point = bounds.getLocation();
-        // 왼쪽 위 모서리 좌표를 정중앙 좌표값으로 보정
-        point.x = getCenterX();
-        point.y = getCenterY();
-        return point;
+        return bounds.getLocation();
     }
 
     @Override
@@ -156,19 +151,12 @@ public class ShapeImpl implements Shape {
         if (Objects.isNull(location)) {
             throw new IllegalArgumentException("location is Null!");
         }
-        // 왼쪽 위 모서리 좌표를 정중앙 좌표값으로 보정
-        location.x = location.x - ((getWidth() / 2) + 1);
-        location.y = location.y - ((getHeight() / 2) + 1);
         bounds.setLocation(location);
     }
 
     @Override
     public void setLocation(int x, int y) {
-        // 왼쪽 위 모서리 좌표를 정중앙 좌표값으로 보정
-        x = x - ((getWidth() / 2) + 1);
-        y = y - ((getHeight() / 2) + 1);
         boundsRangeCheck(x, y, getWidth(), getHeight());
-
         bounds.setLocation(x, y);
     }
 

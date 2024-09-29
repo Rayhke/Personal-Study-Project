@@ -104,4 +104,10 @@ public class PaintableImpl extends ShapeImpl implements Paintable {
         }
         g.setColor(backupColor);
     }
+
+    // TODO : 임시
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }

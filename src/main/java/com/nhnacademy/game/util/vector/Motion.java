@@ -33,4 +33,8 @@ public class Motion extends Vector {
         super.dx = dx;
         super.dy = dy;
     }
+
+    public String toString() {
+        return String.format("motion(dx=%d, dy=%d)", dx, dy);
+    }
 }
