@@ -149,8 +149,8 @@ public class MovableImpl extends PaintableImpl implements Movable {
 
     @Override
     public synchronized void move() {
-        moveTo((int) getBounds().getCenterX() + getMotion().getDX(),
-                (int) getBounds().getCenterY() + getMotion().getDY());
+        moveTo((int) getBounds().getMinX() + getMotion().getDX(),
+                (int) getBounds().getMinY() + getMotion().getDY());
     }
 
     /**
