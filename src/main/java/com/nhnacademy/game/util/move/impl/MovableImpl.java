@@ -33,40 +33,6 @@ public class MovableImpl extends PaintableImpl implements Movable {
         this.dt = DefaultMovable.DEFAULT_DT;
     }
 
-    /**
-     * Subclass Constructor
-     *
-     * @param shapeType 도형의 타입
-     * @param id        도형의 고유 ID
-     * @param name      도형에게 지정할 이름
-     * @param minX      도형이 차지하는 영역 minX
-     * @param minY      도형의 차지하는 영역 minY
-     * @param width     도형이 차지하는 영역 너비(폭)
-     * @param height    도형이 차지하는 영역 높이
-     * @param color     도형의 색상
-     * @param motion    도형의 이동 변위량
-     * @param dt        도형의 이동 딜레이 (ms 단위)
-     * @throws IllegalArgumentException 입력된 파라미터 중에 null 이 있는 경우
-     * @throws InvalidSizeException     도형이 차지하는 영역의 넓이가 1미만일 경우
-     * @throws OutOfBoundsException     도형의 차지하는 영역이 정수 범위 내의 공간을 벗어날 경우
-     * @deprecated
-     */
-    protected MovableImpl(ShapeType shapeType, UUID id, String name, int minX, int minY, int width, int height, Color color, Motion motion, int dt) {
-        super(shapeType, id, name, minX, minY, width, height, color);
-
-        if (Objects.isNull(motion)) {
-            throw new IllegalArgumentException("motion is Null!");
-        }
-
-        if (dt < 0) {
-            throw new IllegalArgumentException();
-        }
-
-        this.motion = motion;
-        this.dt = dt;
-        this.moveCount = 0;
-    }
-
     // =================================================================================================================
     // builder
 

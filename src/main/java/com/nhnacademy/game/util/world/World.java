@@ -67,4 +67,14 @@ public class World extends JPanel {
         }
 
     }
+
+
+    public Shape getShape(int index) {
+        return shapeList.get(index);
+    }
+
+    // TODO : 임시
+    public int getShapeCount() {
+        return shapeList.size();
+    }
 }
