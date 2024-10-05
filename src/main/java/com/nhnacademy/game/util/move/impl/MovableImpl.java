@@ -1,5 +1,7 @@
 package com.nhnacademy.game.util.move.impl;
 
+import com.nhnacademy.game.error.InvalidSizeException;
+import com.nhnacademy.game.error.OutOfBoundsException;
 import com.nhnacademy.game.error.OutOfTimeRangeException;
 import com.nhnacademy.game.util.config.DefaultMovable;
 import com.nhnacademy.game.util.move.Movable;
@@ -20,13 +22,53 @@ public class MovableImpl extends PaintableImpl implements Movable {
 
     private int dt;
 
+    /**
+     * TODO: 당장 쓸지는 미지수
+     */
+    private int moveCount;
+
     public MovableImpl() {
         super();
         this.motion = new Motion();
         this.dt = DefaultMovable.DEFAULT_DT;
     }
 
+    /**
+     * Subclass Constructor
+     *
+     * @param shapeType 도형의 타입
+     * @param id        도형의 고유 ID
+     * @param name      도형에게 지정할 이름
+     * @param minX      도형이 차지하는 영역 minX
+     * @param minY      도형의 차지하는 영역 minY
+     * @param width     도형이 차지하는 영역 너비(폭)
+     * @param height    도형이 차지하는 영역 높이
+     * @param color     도형의 색상
+     * @param motion    도형의 이동 변위량
+     * @param dt        도형의 이동 딜레이 (ms 단위)
+     * @throws IllegalArgumentException 입력된 파라미터 중에 null 이 있는 경우
+     * @throws InvalidSizeException     도형이 차지하는 영역의 넓이가 1미만일 경우
+     * @throws OutOfBoundsException     도형의 차지하는 영역이 정수 범위 내의 공간을 벗어날 경우
+     * @deprecated
+     */
+    protected MovableImpl(ShapeType shapeType, UUID id, String name, int minX, int minY, int width, int height, Color color, Motion motion, int dt) {
+        super(shapeType, id, name, minX, minY, width, height, color);
+
+        if (Objects.isNull(motion)) {
+            throw new IllegalArgumentException("motion is Null!");
+        }
+
+        if (dt < 0) {
+            throw new IllegalArgumentException();
+        }
+
+        this.motion = motion;
+        this.dt = dt;
+        this.moveCount = 0;
+    }
+
     // =================================================================================================================
+    // builder
 
     @Override
     public MovableImpl shapeType(ShapeType shapeType) {
@@ -48,10 +90,8 @@ public class MovableImpl extends PaintableImpl implements Movable {
 
     @Override
     public MovableImpl bounds(Rectangle bounds) {
-        return bounds((int) bounds.getMinX(),
-                        (int) bounds.getMinY(),
-                        (int) bounds.getWidth(),
-                        (int) bounds.getHeight());
+        super.bounds(bounds);
+        return this;
     }
 
     @Override
@@ -93,6 +133,7 @@ public class MovableImpl extends PaintableImpl implements Movable {
     }
 
     // =================================================================================================================
+    // thread
 
     @Override
     public void start() {
@@ -106,6 +147,7 @@ public class MovableImpl extends PaintableImpl implements Movable {
 
     @Override
     public void run() {
+        // 충돌이 발생했을 시, 움직이도록
         while (!Thread.currentThread().isInterrupted()) {
             try {
                 Thread.sleep(dt);
@@ -118,6 +160,7 @@ public class MovableImpl extends PaintableImpl implements Movable {
     }
 
     // =================================================================================================================
+    // method
 
     @Override
     public Motion getMotion() {
@@ -129,7 +172,7 @@ public class MovableImpl extends PaintableImpl implements Movable {
         if (Objects.isNull(motion)) {
             throw new IllegalArgumentException("motion is Null!");
         }
-        this.motion.setMotion(motion);
+        this.motion.setMotion(motion.getDX(), motion.getDY());
     }
 
     @Override
@@ -149,8 +192,8 @@ public class MovableImpl extends PaintableImpl implements Movable {
 
     @Override
     public synchronized void move() {
-        moveTo((int) getBounds().getCenterX() + getMotion().getDX(),
-                (int) getBounds().getCenterY() + getMotion().getDY());
+        moveTo((int) getBounds().getMinX() + getMotion().getDX(),
+                (int) getBounds().getMinY() + getMotion().getDY());
     }
 
     /**
@@ -161,10 +204,9 @@ public class MovableImpl extends PaintableImpl implements Movable {
      */
     @Override
     public synchronized void moveTo(int x, int y) {
-        /*int widthDiv2 = super.getWidth() / 2;
-        int heightDiv2 = super.getHeight() / 2;
-        log.debug("minX={}, minY={}, maxX={}, maxY={}",
-                x - widthDiv2, y - heightDiv2, x + widthDiv2, y + heightDiv2);*/
+        //TODO: log 감시
+        log.debug("minX = {}, minY = {}, maxX = {}, maxY = {}",
+                x, y, x + super.getWidth(), y + super.getHeight());
         super.setLocation(x, y);
     }
 
@@ -181,9 +223,14 @@ public class MovableImpl extends PaintableImpl implements Movable {
         this.dt = dt;
     }
 
-    // TODO : 임시
+    public void addMoveCount() {
+        moveCount++;
+    }
+
     @Override
     public String toString() {
-        return super.toString();
+        return String.format("[%s]\t\t - %s[Location(x=%d, y=%d), Bounds(minX=%d, minY=%d, maxX=%d, maxY=%d, width=%d, height=%d), Motion(dx=%d, dy=%d), Color=%s, dt=%d]",
+                getId(), getShapeType(), getCenterX(), getCenterY(), getMinX(), getMinY(), getMaxX(), getMaxY(), getWidth(), getHeight(),
+                getMotion().getDX(), getMotion().getDY(), getColor(), getDT());
     }
 }
