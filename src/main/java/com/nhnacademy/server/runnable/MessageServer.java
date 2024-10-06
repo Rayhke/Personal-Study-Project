@@ -1,5 +1,6 @@
 package com.nhnacademy.server.runnable;
 
+import com.nhnacademy.server.thread.pool.WorkerThreadPool;
 import com.nhnacademy.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 
@@ -47,6 +48,9 @@ public class MessageServer implements Runnable {
             }
             throw new RuntimeException();
         }
+
+        this.requestChannel = new RequestChannel();
+        this.workerThreadPool = new WorkerThreadPool(new RequestHandler(this.requestChannel));
     }
 
     // =================================================================================================================
