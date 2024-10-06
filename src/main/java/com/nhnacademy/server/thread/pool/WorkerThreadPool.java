@@ -38,14 +38,12 @@ public class WorkerThreadPool {
     }
 
     public synchronized void start() {
-        // start()는 동기화 처리되어야 합니다.
         for (Thread thread : workerThreads) {
             thread.start();
         }
     }
 
     public synchronized void stop() {
-        // stop() 동기화 처리되어야 합니다.
         for (Thread thread : workerThreads) {
             if (Objects.isNull(thread) || thread.isInterrupted()) { continue; }
             thread.interrupt();
