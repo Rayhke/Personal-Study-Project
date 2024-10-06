@@ -1,7 +1,5 @@
 package com.nhnacademy.game.util.vector;
 
-import com.nhnacademy.game.util.world.World;
-
 public abstract class Vector {
 
     /**
@@ -90,7 +88,7 @@ public abstract class Vector {
     }
 
     /**
-     * 사용 목적 {@link World#setTranslate(int, int)}
+     *
      * @param dx 수정할 값
      */
     protected void setDX(int dx) {
@@ -98,7 +96,7 @@ public abstract class Vector {
     }
 
     /**
-     * 사용 목적 {@link World#setTranslate(int, int)}
+     *
      * @param dy 수정할 값
      */
     protected void setDY(int dy) {

@@ -14,6 +14,9 @@ import java.util.UUID;
 
 public class PaintableImpl extends ShapeImpl implements Paintable {
 
+    /**
+     * 도형의 색상
+     */
     private Color color;
 
     public PaintableImpl() {
@@ -22,6 +25,7 @@ public class PaintableImpl extends ShapeImpl implements Paintable {
     }
 
     // =================================================================================================================
+    // builder
 
     @Override
     public PaintableImpl shapeType(ShapeType shapeType) {
@@ -70,6 +74,7 @@ public class PaintableImpl extends ShapeImpl implements Paintable {
     }
 
     // =================================================================================================================
+    // method
 
     @Override
     public Color getColor() {
@@ -105,9 +110,9 @@ public class PaintableImpl extends ShapeImpl implements Paintable {
         g.setColor(backupColor);
     }
 
-    // TODO : 임시
     @Override
     public String toString() {
-        return super.toString();
+        return String.format("[%s]\t\t - %s[Location(x=%d, y=%d), Bounds(minX=%d, minY=%d, maxX=%d, maxY=%d, width=%d, height=%d), Color=%s]",
+                getId(), getShapeType(), getCenterX(), getCenterY(), getMinX(), getMinY(), getMaxX(), getMaxY(), getWidth(), getHeight(), getColor());
     }
 }

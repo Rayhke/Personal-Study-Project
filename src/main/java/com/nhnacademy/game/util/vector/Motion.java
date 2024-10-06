@@ -2,31 +2,44 @@ package com.nhnacademy.game.util.vector;
 
 import com.nhnacademy.game.util.config.DefaultMotion;
 
-import java.util.Objects;
-
+/**
+ * 도형의 변위량
+ */
 public class Motion extends Vector {
 
     /**
-     * Default
+     * Default Constructor
      */
     public Motion() {
-        super(DefaultMotion.DEFAULT_DX, DefaultMotion.DEFAULT_DY);
+        this(DefaultMotion.DEFAULT_DX, DefaultMotion.DEFAULT_DY);
     }
 
-    public Motion(int dx, int dy) {
-        super(dx, dy);
-    }
-
-    public Motion(Vector vector) {
-        this(vector.getDX(), vector.getDY());
-    }
-
+    /**
+     * Copy Constructor
+     *
+     * @param motion 객체
+     */
     public Motion(Motion motion) {
         this(motion.getDX(), motion.getDY());
     }
 
-    public void setMotion(Motion motion) {
-        setMotion(motion.getDX(), motion.getDY());
+    /**
+     * Super Constructor
+     *
+     * @param vector 부모 객체
+     */
+    public Motion(Vector vector) {
+        this(vector.getDX(), vector.getDY());
+    }
+
+    /**
+     * Main Constructor
+     *
+     * @param dx X축 변위량
+     * @param dy Y축 변위량
+     */
+    public Motion(int dx, int dy) {
+        super(dx, dy);
     }
 
     public void setMotion(int dx, int dy) {
@@ -35,6 +48,6 @@ public class Motion extends Vector {
     }
 
     public String toString() {
-        return String.format("motion(dx=%d, dy=%d)", dx, dy);
+        return String.format("Motion[dx = %d, dy = %d]", dx, dy);
     }
 }

@@ -101,7 +101,17 @@ public class BoundedImpl extends MovableImpl implements Bounded {
     }
 
     public BoundedImpl boundedArea(Rectangle boundedArea) {
-        this.boundedArea = new Rectangle(boundedArea);
+        if (Objects.isNull(boundedArea)) {
+            throw new IllegalArgumentException("boundedArea is Null!");
+        }
+        return boundedArea((int) boundedArea.getMinX(),
+                            (int) boundedArea.getMinY(),
+                            (int) boundedArea.getWidth(),
+                            (int) boundedArea.getHeight());
+    }
+
+    public BoundedImpl boundedArea(int minX, int minY, int width, int height) {
+        this.boundedArea = new Rectangle(minX, minY, width, height);
         return this;
     }
 
@@ -164,13 +174,11 @@ public class BoundedImpl extends MovableImpl implements Bounded {
         return (int) boundedArea.getHeight();
     }
 
-    // 다음으로 갈 위치가 필드의 경계 영역을 벗어났냐?
     @Override
     public boolean isOutOfBounds(Rectangle otherBounds) {
         return !getBoundedArea().intersects(otherBounds);
     }
 
-    // 그렇다면 튕겨내겠다 휴-먼
     @Override
     public void bounce(Rectangle otherBounds) {
         if (isOutOfBounds(otherBounds)) {

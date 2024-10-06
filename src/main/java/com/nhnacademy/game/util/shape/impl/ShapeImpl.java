@@ -62,6 +62,7 @@ public class ShapeImpl implements Shape {
     }
 
     // =================================================================================================================
+    // builder
 
     public ShapeImpl shapeType(ShapeType shapeType) {
         if (Objects.isNull(shapeType)) {
@@ -112,6 +113,7 @@ public class ShapeImpl implements Shape {
     }
 
     // =================================================================================================================
+    // method
 
     @Override
     public ShapeType getShapeType() {
@@ -216,6 +218,11 @@ public class ShapeImpl implements Shape {
         return bounds.intersection(shape.getBounds());
     }
 
+    /**
+     * Object 에 World 정보를 참조할 수 있도록 정보를 제공할 목적
+     *
+     * @param world 내가 소속된 World 정보
+     */
     @Override
     public void setWorld(World world) {
         if (Objects.isNull(world)) {
@@ -226,8 +233,8 @@ public class ShapeImpl implements Shape {
 
     @Override
     public String toString() {
-        return String.format("%s[location(x=%d, y=%d), bounds(minX=%d, minY=%d, maxX=%d, maxY=%d, width=%d, height=%d)]",
-                getShapeType(), getCenterX(), getCenterY(), getMinX(), getMinY(), getMaxX(), getMaxY(), getWidth(), getHeight());
+        return String.format("[%s]\t\t - %s[Location(x=%d, y=%d), Bounds(minX=%d, minY=%d, maxX=%d, maxY=%d, width=%d, height=%d)]",
+                getId(), getShapeType(), getCenterX(), getCenterY(), getMinX(), getMinY(), getMaxX(), getMaxY(), getWidth(), getHeight());
     }
 
     @Override
@@ -254,8 +261,12 @@ public class ShapeImpl implements Shape {
             throw new InvalidSizeException(width, height);
         }
 
-        if (minX < 1 || Integer.MAX_VALUE == minX + width
-                || minY < 1 || Integer.MAX_VALUE == minY + height) {
+        // 최소는 Integer.MIN_VALUE < minX 까지 용인           == Integer.MIN_VALUE + 1 (min 만 고려)
+        // 최대는 minX + width < Integer.MAX_VALUE 까지 용인   == Integer.MAX_VALUE - 2 (너비와 높이를 더했을 경우도 포함해서)
+        if (minX == Integer.MIN_VALUE
+                || Integer.MAX_VALUE == minX + width
+                || minY == Integer.MIN_VALUE
+                || Integer.MAX_VALUE == minY + height) {
             throw new OutOfBoundsException();
         }
     }

@@ -139,19 +139,19 @@ public interface Shape {
     Rectangle intersection(Shape shape);
 
     /**
+     * 객체에 대한 정보를 출력한다.
+     *
+     * @return 객체 정보
+     */
+    String toString();
+
+    /**
      * 내가 소속된 World 정보를 설정합니다.<br>
      * 이후, World 객체를 통해 상호작용할 예정
      *
      * @param world 내가 소속된 World 정보
      */
     void setWorld(World world);
-
-    /**
-     * 객체에 대한 정보를 출력한다.
-     *
-     * @return 객체 정보
-     */
-    String toString();
 
     boolean equals(Object o);
 

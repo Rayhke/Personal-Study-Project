@@ -1,7 +1,5 @@
 package com.nhnacademy.game.util.move.impl;
 
-import com.nhnacademy.game.error.InvalidSizeException;
-import com.nhnacademy.game.error.OutOfBoundsException;
 import com.nhnacademy.game.error.OutOfTimeRangeException;
 import com.nhnacademy.game.util.config.DefaultMovable;
 import com.nhnacademy.game.util.move.Movable;
