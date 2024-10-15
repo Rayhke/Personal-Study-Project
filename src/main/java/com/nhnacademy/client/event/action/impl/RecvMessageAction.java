@@ -2,6 +2,7 @@ package com.nhnacademy.client.event.action.impl;
 
 import com.nhnacademy.client.event.action.MessageAction;
 import com.nhnacademy.client.ui.form.MessageClientForm;
+import com.nhnacademy.util.StringUtils;
 
 import java.util.Objects;
 
@@ -26,6 +27,6 @@ public class RecvMessageAction implements MessageAction {
         // %n 보단, System.lineSeparator() 를 적극적으로 써라
         // 운영체제에 따라, 개행 문자의 방식이 다르다.
         messageClientForm.getMessageArea().append(message);
-        messageClientForm.getMessageArea().append(System.lineSeparator());
+        messageClientForm.getMessageArea().append(StringUtils.CRLF);
     }
 }

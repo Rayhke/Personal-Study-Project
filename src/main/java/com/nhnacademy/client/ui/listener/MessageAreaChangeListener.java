@@ -29,7 +29,6 @@ public class MessageAreaChangeListener implements DocumentListener {
         handleTextChange();
     }
 
-    // TODO : 위의 method 이벤트들이 발생하는 것이 정확히 무엇인지 이해해라.
     private void handleTextChange() {
         // scroll 하단으로 이동
         JScrollBar verticalScrollBar = messageClientForm.getScrollPane().getVerticalScrollBar();

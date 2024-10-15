@@ -150,18 +150,10 @@ public class MessageClientForm {
     }
 
     public static void showUI(Subject subject) {
-        // TODO : 정확하게 파악한 게, 맞는 지 검증해라.
         SwingUtilities.invokeLater(() -> {
             // 이렇게 되는 이유는 SwingUtilities.invokeLater(Runnable runnable) 형식이기 때문
             // 즉, 아래의 class 를 Runnable 타입을 상속한 것 처럼 만들어버림.
             new MessageClientForm(subject);
         });
-        /*SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                // TODO : 진짜 이게 전부라고?
-                new MessageClientForm(subject);
-            }
-        });*/
     }
 }

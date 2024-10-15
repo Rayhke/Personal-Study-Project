@@ -76,36 +76,13 @@ public class MessageClient implements Runnable {
             while (!Thread.currentThread().isInterrupted()) {
                 Thread.sleep(1000);
             }
-
-            /*System.out.print("send-message : ");
-            String userMessage = null;
-
-            while (!clientSocket.isClosed()) {
-                // 현재 상태로 그대로 두면, 클라이언트 이용자가 입력을 주지 않는 한, 어떠한 메세지도 못 받는 단 뜻이다.
-                while (!userInput.ready()) {
-                    Thread.yield();
-                }
-
-                userMessage = userInput.readLine();
-                if (Objects.isNull(userMessage) || userMessage.isBlank()) {
-                    System.out.print("send-message : ");
-                    continue;
-                }
-                output.println(userMessage);
-                output.flush();
-
-                Thread.sleep(1000);
-
-                System.out.println(String.format("[client] recv-message : %s", input.readLine()));
-                System.out.print("send-message : ");
-            }*/
         } catch (Exception e) {
             log.debug("message : {}", e.getMessage(), e);
             log.debug("client close");
-            if (e instanceof InterruptedException) {
+            /*if (e instanceof InterruptedException) {
                 log.debug("exit!");
                 Thread.currentThread().interrupt();
-            }
+            }*/
         } finally {
             if (Objects.nonNull(clientSocket)) {
                 try {

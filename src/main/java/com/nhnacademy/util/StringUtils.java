@@ -4,6 +4,8 @@ import java.util.Objects;
 
 public final class StringUtils {
 
+    public static final String CRLF = System.lineSeparator();
+
     private StringUtils() {}
 
     // StringUtils.isEmpty() 과 비슷하다.
