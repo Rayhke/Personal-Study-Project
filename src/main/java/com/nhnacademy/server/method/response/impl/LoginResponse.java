@@ -2,6 +2,7 @@ package com.nhnacademy.server.method.response.impl;
 
 import com.nhnacademy.server.method.response.Response;
 import com.nhnacademy.server.runnable.MessageServer;
+import com.nhnacademy.server.thread.channel.Session;
 import com.nhnacademy.util.StringUtils;
 
 import java.util.List;
@@ -27,11 +28,13 @@ public class LoginResponse implements Response {
         if (StringUtils.isNullOrEmpty(value)) {
             throw new IllegalArgumentException("value is Null!");
         }
-
         return (value.equals("list")) ?
                 clientList()
-                : clientLoginTry();
+                : clientLoginTry(value);
     }
+
+    // =================================================================================================================
+    // private method
 
     private String clientList() {
         List<String> clientIdList = MessageServer.getClientIdList();
@@ -41,7 +44,9 @@ public class LoginResponse implements Response {
 
     }
 
-    private String clientLoginTry() {
-
+    private String clientLoginTry(String value) {
+        boolean loginSuccess = MessageServer.addClient(value, Session.getCurrentClient());
+        if (loginSuccess) { Session.initializedId(value); }
+        return String.format("%s %s!", METHOD, (loginSuccess) ? "success" : "fail");
     }
 }

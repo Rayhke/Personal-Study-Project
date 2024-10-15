@@ -1,9 +1,10 @@
-package com.nhnacademy.server.thread.channel;
+package com.nhnacademy.server.thread.channel.impl;
 
 import com.nhnacademy.server.method.parser.MethodParser;
 import com.nhnacademy.server.method.parser.MethodParser.MethodAndValue;
 import com.nhnacademy.server.method.response.Response;
 import com.nhnacademy.server.method.response.ResponseFactory;
+import com.nhnacademy.server.thread.channel.Executable;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.BufferedReader;

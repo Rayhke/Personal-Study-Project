@@ -2,6 +2,7 @@ package com.nhnacademy.server.method.response.impl;
 
 import com.nhnacademy.server.method.response.Response;
 import com.nhnacademy.server.runnable.MessageServer;
+import com.nhnacademy.server.thread.channel.Session;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.PrintWriter;

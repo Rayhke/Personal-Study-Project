@@ -26,9 +26,9 @@ public class PortResponse implements Response {
         boolean isFetchAll = false;
         if (StringUtils.isNullOrEmpty(value)) { isFetchAll = true; }
 
-        // TODO : 운영체제에 따라 결과가 달라질 수도 있습니다.
         StringBuilder sb = new StringBuilder();
         try {
+            // 우분투 환경 기준
             Process process = Runtime.getRuntime().exec("lsof -n -i -P");
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
 
