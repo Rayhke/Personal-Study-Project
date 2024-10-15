@@ -5,7 +5,6 @@ import com.nhnacademy.util.StringUtils;
 
 public class EchoResponse implements Response {
 
-    // echo method 에 해당되는 응답을 구현 합니다.
     private static final String METHOD = "echo";
 
     @Override

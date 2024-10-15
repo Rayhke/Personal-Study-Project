@@ -4,11 +4,13 @@ import com.nhnacademy.util.StringUtils;
 
 import java.util.Objects;
 
-public class MethodParser {
+public final class MethodParser {
+
+    private MethodParser() {}
 
     public static MethodAndValue parse(String message) {
         if (StringUtils.isNullOrEmpty(message)) {
-            return null; // Optional and Stream 구조도 나쁘진 않겠다..
+            return null;
         }
 
         String[] data = message.split(" ");
@@ -16,17 +18,17 @@ public class MethodParser {
         String value;
 
         // 데이터는 정상이 맞는 데, 양식이 틀어져서 띄어쓰기가 없는 경우
-        if (data.length < 2) {
+        if (data.length == 1) {
             method = data[0];
             return new MethodAndValue(method, "");
         }
 
         method = data[0];
-        value = data[1];
-        return new MethodAndValue(method, value);
+        value = message.substring(data[0].length());
+        return new MethodAndValue(method, value.trim());
     }
 
-    public static class MethodAndValue {
+    public static final class MethodAndValue {
 
         private final String method;
 
@@ -36,11 +38,9 @@ public class MethodParser {
             if (StringUtils.isNullOrEmpty(method)) {
                 throw new IllegalArgumentException("method is Null!");
             }
-
             if (Objects.isNull(value)) {
                 throw new IllegalArgumentException("value is Null!");
             }
-
             this.method = method;
             this.value = value;
         }

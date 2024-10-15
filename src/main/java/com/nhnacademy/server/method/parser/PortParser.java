@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
-public class PortParser {
+public final class PortParser {
 
     public enum Mode {
         TCP, UDP
@@ -23,7 +23,8 @@ public class PortParser {
     // "\\s"    : 공백, 탭만 인식
     // "\\S"    : 공백, 탭이 아닌 문자만 인식
 
-    // TODO : 언제든 구조가 변경될 수도 있습니다.
+    private PortParser() {}
+
     public static AddressAndPort parse(String message) {
         if (StringUtils.isNullOrEmpty(message)) {
             return null;
@@ -36,11 +37,12 @@ public class PortParser {
             mode = Mode.TCP;
         } else {
             index = message.lastIndexOf(Mode.UDP.toString());
-            if (index == -1) { return null; }
+            if (index == -1) {
+                return null;
+            }
             mode = Mode.UDP;
         }
 
-        // TODO : 우분투 환경 기준으로 index 55 부터 끌어오면 되긴 하지만, 환경이 달라질 것을 대비해 그대로 보존
         String[] data = message.substring(index).split(" ");
         return Arrays.stream(data)
                 .filter(str -> PATTERN.matcher(str).matches())
@@ -71,7 +73,7 @@ public class PortParser {
                 .orElse(null);
     }
 
-    public static class AddressAndPort {
+    public static final class AddressAndPort {
 
         private final Mode mode;
 

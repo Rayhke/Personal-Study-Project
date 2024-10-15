@@ -8,11 +8,10 @@ public final class StringUtils {
 
     // StringUtils.isEmpty() 과 비슷하다.
     public static boolean isNullOrEmpty(String s) {
-        if (Objects.isNull(s)) {
-            return true;
-        }
-        return s.replace(" ", "").isBlank();
+        return Objects.isNull(s)
+                || s.replace(" ", "").isBlank();
     }
+
     // StringTypeData.trim() 는 앞뒤의 공백만 제거하고, 그 사이에 공백은 제거 하지 못한다.
     // StringTypeData.replace() 은 regex 에 지시한 문자열을 전부 replacement 으로 변환한다.
     // StringTypeData.replaceAll() 의 차이는 regex "[]" 안에 지시한 문자들은 전부 검증한다.
